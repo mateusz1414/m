@@ -48,7 +48,15 @@ func main() {
 func authf() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authorization := c.GetHeader("Authorization")
-		token := strings.Split(authorization, "Bearer ")[1]
+		bearer := strings.Split(authorization, "Bearer ")
+		if len(bearer) <= 1 {
+			c.JSON(401, gin.H{
+				"erro": "you must authenticate",
+			})
+			c.Abort()
+			return
+		}
+		token := bearer[1]
 		userID := structs.Login(token)
 		if userID == 0 {
 			c.JSON(401, gin.H{
