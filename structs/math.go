@@ -5,7 +5,7 @@ import (
 )
 
 type Function struct {
-	FunctionID int    `gorm:"column:FunctionID"`
+	FunctionID int    `gorm:"column:FunctionID;PRIMARY_KEY"`
 	UserID     int    `gorm:"column:UserID"`
 	Value      string `gorm:"column:Value" json:"value"`
 }

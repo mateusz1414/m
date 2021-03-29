@@ -25,6 +25,7 @@ func AddFunction(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{
 		"success": "true",
+		"id":      function.FunctionID,
 	})
 
 }
