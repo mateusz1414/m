@@ -70,7 +70,8 @@ func DeleteEra(c *gin.Context) {
 func AddReading(c *gin.Context) {
 	reading := structs.Reading{}
 	c.BindJSON(&reading)
-	reading.Readed = false
+	var a = false
+	reading.Readed = &a
 	db, _ := c.Get("db")
 	database := db.(*gorm.DB)
 	err := structs.AddReading(reading, database)
