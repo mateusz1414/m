@@ -9,7 +9,7 @@ type Reading struct {
 	EraID       int    `gorm:"column:EraID" json:"eraID"`
 	ReadingName string `gorm:"column:ReadingName" json:"readingName"`
 	Author      string `gorm:"column:Author" json:"author"`
-	Readed      bool   `gorm:"column:Readed" json:"readed"`
+	Readed      *bool  `gorm:"column:Readed" json:"readed"`
 }
 
 type LiteraryEra struct {
@@ -56,6 +56,6 @@ func RemoveReading(readingID int, db *gorm.DB) error {
 }
 
 func ChangeReadedStatus(reading Reading, db *gorm.DB) error {
-	err := db.Debug().Table("reading").Select("Readed").Where("ReadingID=?", reading.ReadingID).Update(reading).Error
+	err := db.Debug().Table("reading").Where("ReadingID=?", reading.ReadingID).Update(reading).Error
 	return err
 }
